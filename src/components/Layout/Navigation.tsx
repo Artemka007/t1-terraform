@@ -9,6 +9,7 @@ export const Navigation: React.FC = () => {
     { path: '/upload', label: 'Загрузка логов', icon: '📤' },
     { path: '/logs', label: 'Просмотр логов', icon: '📊' },
     { path: '/about', label: 'О программе', icon: 'ℹ️' },
+    { path: '/parser', label: 'Анализ парсера', icon: '🔬' },
   ]
 
   return (

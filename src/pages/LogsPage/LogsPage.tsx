@@ -12,7 +12,7 @@ export const LogsPage: React.FC = () => {
     const savedLogs = localStorage.getItem('terraformLogs')
     if (savedLogs) {
       try {
-        setLogs(JSON.parse(savedLogs))
+        setLogs(JSON.parse(savedLogs).map((i, id) => ({...i, id: String(id) + '-' + i['@message']})))
       } catch (error) {
         console.error('Ошибка при загрузке логов:', error)
       }

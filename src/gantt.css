@@ -1,0 +1,95 @@
+/* src/styles/gantt.css */
+/* Кастомизация Frappe Gantt */
+.gantt .grid-background {
+  fill: none;
+}
+
+.gantt .grid-header {
+  fill: #f8fafc;
+  stroke: #e2e8f0;
+}
+
+.gantt .grid-row {
+  fill: #ffffff;
+}
+
+.gantt .grid-row:nth-child(even) {
+  fill: #f8fafc;
+}
+
+.gantt .row-line {
+  stroke: #e2e8f0;
+}
+
+.gantt .today-highlight {
+  fill: #fef3c7;
+  opacity: 0.5;
+}
+
+/* Стили для групп */
+.gantt .bar-group {
+  fill: #374151;
+  stroke: #1f2937;
+}
+
+.gantt .bar-group-progress {
+  fill: #4b5563;
+}
+
+/* Стили для задач по уровням */
+.gantt .bar-wrapper.gantt-info .bar {
+  fill: #3b82f6;
+  stroke: #1d4ed8;
+}
+
+.gantt .bar-wrapper.gantt-info .bar-progress {
+  fill: #60a5fa;
+}
+
+.gantt .bar-wrapper.gantt-warn .bar {
+  fill: #f59e0b;
+  stroke: #d97706;
+}
+
+.gantt .bar-wrapper.gantt-warn .bar-progress {
+  fill: #fbbf24;
+}
+
+.gantt .bar-wrapper.gantt-error .bar {
+  fill: #ef4444;
+  stroke: #dc2626;
+}
+
+.gantt .bar-wrapper.gantt-error .bar-progress {
+  fill: #f87171;
+}
+
+.gantt .bar-wrapper.gantt-debug .bar {
+  fill: #6b7280;
+  stroke: #4b5563;
+}
+
+.gantt .bar-wrapper.gantt-debug .bar-progress {
+  fill: #9ca3af;
+}
+
+/* Ховер эффекты */
+.gantt .bar-wrapper:hover .bar {
+  filter: brightness(1.1);
+}
+
+.gantt .bar-wrapper:hover .bar-progress {
+  filter: brightness(1.2);
+}
+
+/* Попап */
+.gantt .popup-wrapper {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.gantt .popup-wrapper .pointer {
+  border-bottom-color: #374151;
+}

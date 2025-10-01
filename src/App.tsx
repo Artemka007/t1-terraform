@@ -5,17 +5,20 @@ import { HomePage } from './pages/HomePage'
 import { UploadPage } from './pages/UploadPage'
 import { LogsPage } from './pages/LogsPage'
 import { AboutPage } from './pages/AboutPage'
+import { ParserAnalysisPage } from './pages/ParserAnalysisPage/ParserAnalysisPage'
 
 export const App: React.FC = () => {
   return (
+    
     <Router>
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/upload" element={<UploadPage />} />
           <Route path="/logs" element={<LogsPage />} />
+          <Route path="/parser" element={<ParserAnalysisPage />} />
           <Route path="/about" element={<AboutPage />} />
-          <Route path="*" element={<div>Страница не найдена</div>} />
+          <Route path="*" element={<div className="p-8 text-center">Страница не найдена</div>} />
         </Routes>
       </Layout>
     </Router>
