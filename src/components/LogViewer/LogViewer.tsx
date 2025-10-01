@@ -1,30 +1,32 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import { LogEntryComponent } from './LogEntry';
-import { SearchPanel } from './SearchPanel';
-import { FilterPanel } from './FilterPanel';
-import type { LogEntry, RequestChain as RequestChainType, FilterConfig, SearchConfig } from '../../types/log.types';
-import { logs } from '../../mock/logsMock';
+import React, { useState, useMemo, useCallback } from 'react'
+import { LogEntryComponent } from './LogEntry'
+import { SearchPanel } from './SearchPanel'
+import { FilterPanel } from './FilterPanel'
+import type { LogEntry, RequestChain as RequestChainType, FilterConfig, SearchConfig } from '@/types/log.types'
 
-// Mock hooks
-const useLogData = () => {
-  const [logData] = useState<LogEntry[]>(logs);
-  const [readEntries, setReadEntries] = useState<Set<string>>(new Set());
+interface LogViewerProps {
+  initialLogs: LogEntry[]
+}
+
+// ... остальной код компонента LogViewer, но используем initialLogs вместо mock данных
+const useLogData = (initialLogs: LogEntry[]) => {
+  const [logData] = useState<LogEntry[]>(initialLogs)
+  const [readEntries, setReadEntries] = useState<Set<string>>(new Set())
 
   const markAsRead = useCallback((id: string) => {
     setReadEntries(prev => {
-      const newSet = new Set(prev);
+      const newSet = new Set(prev)
       if (newSet.has(id)) {
-        newSet.delete(id);
+        newSet.delete(id)
       } else {
-        newSet.add(id);
+        newSet.add(id)
       }
-      return newSet;
-    });
-  }, []);
+      return newSet
+    })
+  }, [])
 
-  return { logData, readEntries, markAsRead };
-};
-
+  return { logData, readEntries, markAsRead }
+}
 const useSearch = (logData: LogEntry[]) => {
   const [searchResults, setSearchResults] = useState<LogEntry[]>(logData);
 
@@ -93,8 +95,8 @@ const useFilters = (logData: LogEntry[]) => {
   };
 };
 
-export const LogViewer: React.FC = () => {
-  const { logData, readEntries, markAsRead } = useLogData();
+export const LogViewer: React.FC<LogViewerProps> = ({ initialLogs }) => {
+  const { logData, readEntries, markAsRead } = useLogData(initialLogs)
   const { searchResults, search, clearSearch } = useSearch(logData);
   const { filteredData, activeFilters, applyFilters, clearFilters } = useFilters(logData);
   

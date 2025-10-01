@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { JSONViewer } from '../JSONViewer/JSONViewer';
+import { JSONViewer } from '../../pages/LogsPage/JSONViewer';
 import type { LogEntry as LogEntryType } from '../../types/log.types';
-import { ChevronIcon } from '../UI/icons';
+import { ChevronIcon } from '../../shared/icons';
 import { clsx } from 'clsx';
 
 interface LogEntryProps {

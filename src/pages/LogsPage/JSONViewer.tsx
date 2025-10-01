@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { JSONView } from '@microlink/react-json-view';
-import { ChevronIcon } from '../UI/icons';
+import JSONView from '@microlink/react-json-view';
+import { ChevronIcon } from '../../shared/icons';
 
 interface JSONViewerProps {
   data: string | object;
@@ -47,7 +47,7 @@ export const JSONViewer: React.FC<JSONViewerProps> = ({
       {isExpanded && (
         <div className="p-3 bg-white max-h-96 overflow-auto">
           <JSONView
-            data={parseJSON(data)}
+            src={parseJSON(data)}
             collapsed={1}
             displayObjectSize={false}
             displayDataTypes={false}

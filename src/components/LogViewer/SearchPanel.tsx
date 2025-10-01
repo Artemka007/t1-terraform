@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import type { SearchConfig } from '../../types/log.types';
 import { debounce } from '../../utils/debounce';
-import { SearchIcon, ClearIcon } from '../UI/icons';
+import { SearchIcon, ClearIcon } from '../../shared/icons';
 
 interface SearchPanelProps {
   onSearch: (config: SearchConfig) => void;

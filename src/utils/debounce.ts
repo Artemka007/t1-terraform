@@ -1,8 +1,8 @@
-export function debounce<T extends (...args: any[]) => void>(
+export function debounce<T extends (...args: Parameters<T>) => void>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
-  let timeout: any;
+  let timeout: number;
   
   return (...args: Parameters<T>) => {
     clearTimeout(timeout);
