@@ -61,30 +61,73 @@ const useFilters = (logData: LogEntry[]) => {
   const [activeFilters, setActiveFilters] = useState<FilterConfig[]>([]);
 
   const applyFilters = useCallback((filters: FilterConfig[]) => {
-    setActiveFilters(filters);
-    
-    if (filters.length === 0) {
-      setFilteredData(logData);
-      return;
-    }
+  setActiveFilters(filters);
+  
+  if (filters.length === 0) {
+    setFilteredData(logData);
+    return;
+  }
 
-    const filtered = logData.filter(entry => {
-      return filters.every(filter => {
+  const filtered = logData.filter(entry => {
+    return filters.every(filter => {
+      try {
         const fieldValue = entry[filter.field as keyof LogEntry];
         const filterValue = filter.value;
         
-        // Для строковых значений
-        if (typeof fieldValue === 'string' && typeof filterValue === 'string') {
-          return fieldValue.toLowerCase().includes(filterValue.toLowerCase());
+        // Если поле не существует, пропускаем фильтр
+        if (fieldValue === undefined || fieldValue === null) {
+          return false;
         }
         
-        // Для точного совпадения
-        return fieldValue === filterValue;
-      });
+        switch (filter.operator) {
+          case 'equals':
+            return fieldValue === filterValue;
+            
+          case 'contains':
+            if (typeof fieldValue === 'string' && typeof filterValue === 'string') {
+              return fieldValue.toLowerCase().includes(filterValue.toLowerCase());
+            }
+            return String(fieldValue).includes(String(filterValue));
+            
+          case 'gt':
+            if (typeof fieldValue === 'number' && typeof filterValue === 'number') {
+              return fieldValue > filterValue;
+            }
+            if (fieldValue instanceof Date && filterValue instanceof Date) {
+              return fieldValue.getTime() > filterValue.getTime();
+            }
+            return String(fieldValue) > String(filterValue);
+            
+          case 'lt':
+            if (typeof fieldValue === 'number' && typeof filterValue === 'number') {
+              return fieldValue < filterValue;
+            }
+            if (fieldValue instanceof Date && filterValue instanceof Date) {
+              return fieldValue.getTime() < filterValue.getTime();
+            }
+            return String(fieldValue) < String(filterValue);
+            
+          case 'in':
+            if (Array.isArray(filterValue)) {
+              return filterValue.some(val => 
+                String(val).toLowerCase() === String(fieldValue).toLowerCase()
+              );
+            }
+            return false;
+            
+          default:
+            console.warn(`Unknown operator: ${filter.operator}`);
+            return true;
+        }
+      } catch (error) {
+        console.error('Error applying filter:', error);
+        return false;
+      }
     });
-    
-    setFilteredData(filtered);
-  }, [logData]);
+  });
+  
+  setFilteredData(filtered);
+}, [logData]);
 
   const clearFilters = useCallback(() => {
     setActiveFilters([]);

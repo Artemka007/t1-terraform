@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { AnalysisRequest } from '../types/plugin.types';
+import type { AnalysisRequest, AnalysisResponse } from '../types/plugin.types';
 import { pluginAPI } from '../api';
 
 

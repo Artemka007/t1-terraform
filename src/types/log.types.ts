@@ -21,7 +21,7 @@ export interface LogEntry {
 
 export interface FilterConfig {
   field: string;
-  operator: 'equals' | 'contains' | 'gt' | 'lt' | 'in';
+  operator: 'equals' | 'contains' | 'gt' | 'lt' | 'gte' | 'lte' | 'in' | 'not' | 'startsWith' | 'endsWith';
   value: any;
 }
 

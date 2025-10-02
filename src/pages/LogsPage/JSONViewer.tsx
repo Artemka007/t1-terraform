@@ -45,7 +45,7 @@ export const JSONViewer: React.FC<JSONViewerProps> = ({
       </div>
       
       {isExpanded && (
-        <div className="p-3 bg-white max-h-96 overflow-auto">
+        <div className="p-3 bg-gray-800 max-h-96 overflow-auto">
           <JSONView
             src={parseJSON(data)}
             collapsed={1}
