@@ -57,7 +57,7 @@ export const LogEntryComponent: React.FC<LogEntryProps> = ({
       <div 
         className={clsx(
           'flex items-start justify-between p-4 cursor-pointer border-b transition-colors',
-          getLevelStyles(entry['@level']),
+          getLevelStyles(entry['@level'] || ''),
           'hover:brightness-95'
         )}
         onClick={() => setShowDetails(!showDetails)}
@@ -66,13 +66,13 @@ export const LogEntryComponent: React.FC<LogEntryProps> = ({
           <div className="flex items-center space-x-3 mb-2 flex-wrap gap-2">
             <span className={clsx(
               'px-2 py-1 rounded text-xs font-medium whitespace-nowrap',
-              getLevelBadgeStyle(entry['@level'])
+              getLevelBadgeStyle(entry['@level'] || '')
             )}>
-              {entry['@level'].toUpperCase()}
+              {entry['@level']?.toUpperCase()}
             </span>
             
             <span className="text-sm text-gray-600 whitespace-nowrap">
-              {formatTimestamp(entry['@timestamp'])}
+              {formatTimestamp(entry['@timestamp'] || '')}
             </span>
             
             {hasRequestId && showRequestChain && (
@@ -101,7 +101,7 @@ export const LogEntryComponent: React.FC<LogEntryProps> = ({
           <button
             onClick={(e) => {
               e.stopPropagation();
-              onMarkRead(entry.id);
+              onMarkRead(entry.id || '');
             }}
             className={clsx(
               'text-xs px-2 py-1 rounded border transition-colors',

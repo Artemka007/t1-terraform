@@ -7,7 +7,6 @@ export const useParserGanttData = (parserResult?: ParserResult): ProcessGanttIte
     if (!parserResult || Object.keys(parserResult).length === 0) return [];
 
     const items: ProcessGanttItem[] = [];
-    let itemId = 0;
 
     // Функция для рекурсивного преобразования процессов
     const processToGanttItems = (
@@ -17,7 +16,6 @@ export const useParserGanttData = (parserResult?: ParserResult): ProcessGanttIte
       parentId?: string
     ): void => {
       const currentId = process.start_message ? process.start_message : process.type === 'main_apply' ? 'Main apply' : 'Main plan';
-      itemId++;
       
       // Определяем уровень на основе статуса
       let level: 'info' | 'warn' | 'error' = 'info';

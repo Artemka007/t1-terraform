@@ -1,63 +1,8 @@
 // src/pages/ParserAnalysisPage.tsx
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ParserGanttChart } from './ParserGanttChart';
-import type { ParserResult, ProcessGanttItem } from './types';
+import type { ProcessGanttItem } from './types';
 import { useParsedData } from '@/hooks/useParsedData';
-
-// Mock данные для демонстрации (замените на реальные данные из парсера)
-const mockParserResult: ParserResult = {
-  apply: {
-    start: '2024-01-15T10:00:00Z',
-    end: '2024-01-15T10:05:30Z',
-    type: 'main_apply',
-    status: 'success',
-    start_message: 'CLI args: []string{"terraform", "apply"}',
-    subprocesses: [
-      {
-        start: '2024-01-15T10:00:30Z',
-        end: '2024-01-15T10:02:00Z',
-        type: 'build_graph_apply',
-        status: 'success',
-        start_message: 'Building and walking apply graph',
-        subprocesses: [],
-      },
-      {
-        start: '2024-01-15T10:02:15Z',
-        end: '2024-01-15T10:04:45Z',
-        type: 'sub_apply',
-        status: 'success',
-        start_message: 'Starting apply for resource',
-        subprocesses: [],
-      },
-    ],
-  },
-  plan: {
-    start: '2024-01-15T09:50:00Z',
-    end: '2024-01-15T09:55:00Z',
-    type: 'main_plan',
-    status: 'error',
-    start_message: 'CLI args: []string{"terraform", "plan"}',
-    subprocesses: [
-      {
-        start: '2024-01-15T09:50:30Z',
-        end: '2024-01-15T09:52:00Z',
-        type: 'build_graph_plan',
-        status: 'success',
-        start_message: 'Building and walking plan graph',
-        subprocesses: [],
-      },
-      {
-        start: '2024-01-15T09:52:15Z',
-        end: '2024-01-15T09:54:00Z',
-        type: 'sub_plan',
-        status: 'error',
-        start_message: 'Plan operation started',
-        end_message: 'Error: Configuration invalid',
-        subprocesses: [],
-      },
-    ],
-  },
-};
 
 export const ParserAnalysisPage: React.FC = () => {
   const {fetchResults, results: parserResult} = useParsedData();
@@ -68,12 +13,6 @@ export const ParserAnalysisPage: React.FC = () => {
 
   const handleItemClick = useCallback((item: ProcessGanttItem) => {
     console.log('Process item clicked:', item);
-  }, []);
-
-  const handleLoadFromParser = useCallback(() => {
-    // Здесь будет логика загрузки реальных данных из парсера
-    // Например, вызов API или использование данных из localStorage
-    console.log('Loading data from parser...');
   }, []);
 
   return (

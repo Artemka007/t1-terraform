@@ -1,8 +1,8 @@
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
 
 const API_CONFIG = {
-  BASE_URL: 'http://localhost:5000/api/v1',
-  TIMEOUT: 1000
+  BASE_URL: 'http://localhost:8000/api/v1',
+  TIMEOUT: 2000
 }
 
 // Типы для ошибок API
