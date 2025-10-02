@@ -6,6 +6,7 @@ import { UploadPage } from './pages/UploadPage'
 import { LogsPage } from './pages/LogsPage'
 import { AboutPage } from './pages/AboutPage'
 import { ParserAnalysisPage } from './pages/ParserAnalysisPage/ParserAnalysisPage'
+import PluginManagerPage from './pages/PluginManagerPage/PluginManagerPage'
 
 export const App: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ export const App: React.FC = () => {
           <Route path="/logs" element={<LogsPage />} />
           <Route path="/parser" element={<ParserAnalysisPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/plugins" element={<PluginManagerPage />} />
           <Route path="*" element={<div className="p-8 text-center">Страница не найдена</div>} />
         </Routes>
       </Layout>

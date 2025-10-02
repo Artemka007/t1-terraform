@@ -1,14 +1,13 @@
 import React from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 export const Navigation: React.FC = () => {
-  const location = useLocation()
-
   const navigationItems = [
     { path: '/', label: 'Главная', icon: '🏠' },
     { path: '/upload', label: 'Загрузка логов', icon: '📤' },
     { path: '/logs', label: 'Просмотр логов', icon: '📊' },
     { path: '/parser', label: 'Анализ парсера', icon: '🔬' },
+    { path: '/plugins', label: 'Менеджер плагинов', icon: '🧩' }, 
     { path: '/about', label: 'О программе', icon: 'ℹ️' },
   ]
 
@@ -40,6 +39,7 @@ export const Navigation: React.FC = () => {
           <h3 className="font-medium text-gray-900 mb-2">Быстрые действия</h3>
           <div className="space-y-2 text-sm">
             <p>📁 Загрузите логи Terraform</p>
+            <p>🧩 Используйте плагины для анализа</p>
             <p>🔍 Анализируйте цепочки запросов</p>
             <p>⚡ Фильтруйте и ищите</p>
           </div>
