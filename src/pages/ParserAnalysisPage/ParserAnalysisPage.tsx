@@ -1,7 +1,8 @@
 // src/pages/ParserAnalysisPage.tsx
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { ParserGanttChart } from './ParserGanttChart';
 import type { ParserResult, ProcessGanttItem } from './types';
+import { useParsedData } from '@/hooks/useParsedData';
 
 // Mock данные для демонстрации (замените на реальные данные из парсера)
 const mockParserResult: ParserResult = {
@@ -59,7 +60,11 @@ const mockParserResult: ParserResult = {
 };
 
 export const ParserAnalysisPage: React.FC = () => {
-  const [parserResult, setParserResult] = useState<ParserResult>(mockParserResult);
+  const {fetchResults, results: parserResult} = useParsedData();
+
+  useEffect(() => {
+    fetchResults(localStorage.getItem('terraformFile')!);
+  }, []);
 
   const handleItemClick = useCallback((item: ProcessGanttItem) => {
     console.log('Process item clicked:', item);
@@ -94,7 +99,7 @@ export const ParserAnalysisPage: React.FC = () => {
         </div>
 
         <ParserGanttChart
-          parserResult={parserResult}
+          parserResult={parserResult?.result || {}}
           height={700}
           onItemClick={handleItemClick}
         />

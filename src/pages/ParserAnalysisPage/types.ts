@@ -10,7 +10,8 @@ export interface ProcessData {
 }
 
 export interface ParserResult {
-  [key: string]: ProcessData; // apply, plan и т.д.
+  apply?: ProcessData; // apply, plan и т.д.
+  plan?: ProcessData; // apply, plan и т.д.
 }
 
 export interface ProcessGanttItem {

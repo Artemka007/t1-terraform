@@ -1,10 +1,10 @@
 // src/components/FileUploadPage/FileUploadPage.tsx
 import React, { useCallback } from 'react';
-import { useJsonUploadAdvanced } from './hooks/useJsonUploadAdvanced';
+import { useJsonUploadAdvanced } from '../../hooks/useJsonUploadAdvanced';
 import type { LogEntry } from '@/types/log.types';
 
 interface FileUploadPageProps {
-  onLogsLoaded: (logs: LogEntry[]) => void;
+  onLogsLoaded: (logs: LogEntry[], fileName: string) => void;
 }
 
 export const FileUploadPage: React.FC<FileUploadPageProps> = ({ onLogsLoaded }) => {
@@ -28,8 +28,8 @@ export const FileUploadPage: React.FC<FileUploadPageProps> = ({ onLogsLoaded }) 
       
       // После успешной загрузки сразу получаем логи
       if (uploadedFileInfo.status === 'success') {
-        const logs = await fetchUploadedLogs(uploadedFileInfo.id);
-        onLogsLoaded(logs);
+        const {logs, fileName} = await fetchUploadedLogs(uploadedFileInfo.id);
+        onLogsLoaded(logs, fileName);
       }
     } catch (err) {
       // Ошибка уже обработана в хуке

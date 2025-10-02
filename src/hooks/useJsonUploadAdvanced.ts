@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { baseApiClient } from '../../../api/baseClient';
-import type { ApiError } from '../../../api/baseClient';
+import { baseApiClient } from '../api/baseClient';
+import type { ApiError } from '../api/baseClient';
 import type { LogEntry } from '@/types/log.types';
 
 export interface UploadedFileInfo {
@@ -21,7 +21,7 @@ interface UploadState {
 
 interface UseJsonUploadAdvancedReturn extends UploadState {
   uploadFile: (file: File) => Promise<UploadedFileInfo>;
-  fetchUploadedLogs: (fileId: string) => Promise<LogEntry[]>;
+  fetchUploadedLogs: (fileId: string) => Promise<{logs: LogEntry[], fileName: string}>;
   reset: () => void;
 }
 
@@ -83,16 +83,16 @@ export const useJsonUploadAdvanced = (): UseJsonUploadAdvancedReturn => {
   }, []);
 
   // Получение загруженных логов
-  const fetchUploadedLogs = useCallback(async (fileId: string): Promise<LogEntry[]> => {
+  const fetchUploadedLogs = useCallback(async (fileId: string): Promise<{logs: LogEntry[], fileName: string}> => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
     try {
-      const response = await baseApiClient.get<{ logs: LogEntry[] }>(
+      const response = await baseApiClient.get<{ logs: LogEntry[]; fileName: string }>(
         `/logs/file/${fileId}`
       );
 
       setState(prev => ({ ...prev, isLoading: false }));
-      return response.data.logs;
+      return response.data;
 
     } catch (error) {
       const apiError = error as ApiError;

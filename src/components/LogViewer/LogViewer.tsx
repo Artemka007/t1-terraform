@@ -3,7 +3,7 @@ import { LogEntryComponent } from './LogEntry'
 import { SearchPanel } from './SearchPanel'
 import { FilterPanel } from './FilterPanel'
 import { GanttChart } from './GanttChart'
-import { useGanttData } from './hooks/useGanttData'
+import { useGanttData } from '../../hooks/useGanttData'
 import type { LogEntry, RequestChain as RequestChainType, FilterConfig, SearchConfig } from '@/types/log.types'
 import type { GanttItem } from '@/types/gantt.types'
 

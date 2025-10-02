@@ -1,8 +1,8 @@
 // src/components/ParserGantt/ParserGanttChart.tsx
 import React, { useMemo, useState, useCallback } from 'react';
 import { Chart } from 'react-google-charts';
-import type { ParserResult, ProcessGanttItem } from './types/parser.types';
-import { useParserGanttData } from './hooks/useParserGanttData';
+import type { ParserResult, ProcessGanttItem } from './types';
+import { useParserGanttData } from '../../hooks/useParserGanttData';
 
 interface ParserGanttChartProps {
   parserResult: ParserResult;

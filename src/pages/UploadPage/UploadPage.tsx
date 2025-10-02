@@ -7,11 +7,10 @@ export const UploadPage: React.FC = () => {
   const navigate = useNavigate()
   const [logs, setLogs] = useState<LogEntry[] | null>(null)
 
-  const handleLogsLoaded = (loadedLogs: LogEntry[]) => {
+  const handleLogsLoaded = (loadedLogs: LogEntry[], fileName: string) => {
     setLogs(loadedLogs)
-    // Сохраняем логи в localStorage для использования на других страницах
     localStorage.setItem('terraformLogs', JSON.stringify(loadedLogs))
-    // Перенаправляем на страницу просмотра логов
+    localStorage.setItem('terraformFile', fileName)
     navigate('/logs')
   }
 

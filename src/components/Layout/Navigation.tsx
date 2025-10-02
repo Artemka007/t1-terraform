@@ -8,8 +8,8 @@ export const Navigation: React.FC = () => {
     { path: '/', label: 'Главная', icon: '🏠' },
     { path: '/upload', label: 'Загрузка логов', icon: '📤' },
     { path: '/logs', label: 'Просмотр логов', icon: '📊' },
-    { path: '/about', label: 'О программе', icon: 'ℹ️' },
     { path: '/parser', label: 'Анализ парсера', icon: '🔬' },
+    { path: '/about', label: 'О программе', icon: 'ℹ️' },
   ]
 
   return (

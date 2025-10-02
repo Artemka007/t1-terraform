@@ -1,8 +1,8 @@
 // src/hooks/useParserGanttData.ts
 import { useMemo } from 'react';
-import type { ParserResult, ProcessGanttItem } from '../types';
+import type { ParserResult, ProcessGanttItem } from '../pages/ParserAnalysisPage/types';
 
-export const useParserGanttData = (parserResult: ParserResult): ProcessGanttItem[] => {
+export const useParserGanttData = (parserResult?: ParserResult): ProcessGanttItem[] => {
   return useMemo(() => {
     if (!parserResult || Object.keys(parserResult).length === 0) return [];
 
@@ -16,7 +16,8 @@ export const useParserGanttData = (parserResult: ParserResult): ProcessGanttItem
       depth: number = 0,
       parentId?: string
     ): void => {
-      const currentId = `item-${itemId++}`;
+      const currentId = process.start_message ? process.start_message : process.type === 'main_apply' ? 'Main apply' : 'Main plan';
+      itemId++;
       
       // Определяем уровень на основе статуса
       let level: 'info' | 'warn' | 'error' = 'info';
@@ -49,7 +50,7 @@ export const useParserGanttData = (parserResult: ParserResult): ProcessGanttItem
     };
 
     // Обрабатываем все основные процессы (apply, plan и т.д.)
-    Object.entries(parserResult).forEach(([processKey, processData]) => {
+    Object.entries(parserResult).filter(([itemId, val]) => !!val).forEach(([processKey, processData]) => {
       processToGanttItems(processData, processKey, 0);
     });
 
